@@ -1,0 +1,9 @@
+{
+  "name": "openssl-example",
+  "version": "1.0.0",
+  "description": "https://github.com/grpc/grpc-node/issues/341",
+  "license": "ISC",
+  "dependencies": {
+    "nan": "^2.0.0"
+  }
+}
