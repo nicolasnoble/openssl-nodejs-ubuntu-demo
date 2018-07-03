@@ -1,14 +1,17 @@
-#include "node.h"
-#include "nan.h"
+#include <node.h>
+#include <nan.h>
+#include <v8.h>
 
 #include <openssl/ssl.h>
 
-NAN_METHOD(Do) {
+void Method(const Nan::FunctionCallbackInfo<v8::Value>& args) {
   SSL_library_init();
+  args.GetReturnValue().Set(Nan::New(SSLeay_version(SSLEAY_VERSION)).ToLocalChecked());
 }
 
-NAN_MODULE_INIT(init) {
-  Nan::HandleScope scope;
-  Nan::SetMethod(target, "do", Do);
+void Init(v8::Local<v8::Object> exports) {
+  exports->Set(Nan::New("do").ToLocalChecked(),
+               Nan::New<v8::FunctionTemplate>(Method)->GetFunction());
 }
-NODE_MODULE(openssl_example, init);
+
+NODE_MODULE(openssl_example, Init);

@@ -1,2 +1,2 @@
 ssl = require('./build/Release/openssl_example')
-ssl.do()
+console.log(ssl.do())
